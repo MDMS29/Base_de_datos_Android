@@ -1,9 +1,11 @@
 package com.example.ingecosmos;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btnGuardar = findViewById(R.id.btnGuardar);
+
+        btnGuardar = findViewById(R.id.btnGuardar);
         etPnombre = findViewById(R.id.etPnombre);
         etSnombre = findViewById(R.id.etSnombre);
         etPapellido = findViewById(R.id.etPapellido);
@@ -38,7 +41,16 @@ public class MainActivity extends AppCompatActivity {
         etTipoDoc = findViewById(R.id.etTipoDoc);
         etNiden = findViewById(R.id.etNiden);
 
-        btnGuardar.setOnClickListener(view -> guardar(etPnombre.getText().toString().trim(), etSnombre.getText().toString().trim(), etPapellido.getText().toString().trim(), etSapellido.getText().toString().trim(), etRol.getText().toString().trim(), etTipoDoc.getText().toString().trim(), etNiden.getText().toString().trim()));
+        btnGuardar.setOnClickListener(view -> {
+            String nombreP = etPnombre.getText().toString().trim();
+            String nombreS = etSnombre.getText().toString().trim();
+            String apellidoP = etPapellido.getText().toString().trim();
+            String apellidoS = etSapellido.getText().toString().trim();
+            String rol = etRol.getText().toString().trim();
+            String tipoDoc = etTipoDoc.getText().toString().trim();
+            String nIden = etNiden.getText().toString().trim();
+            guardar(nombreP, nombreS, apellidoP, apellidoS, rol, tipoDoc, nIden);
+        });
 
 
     }
@@ -47,19 +59,9 @@ public class MainActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 URLI,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(MainActivity.this, "Correcto", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Incorrecto", Toast.LENGTH_SHORT).show();
-            }
-        }
+                response -> Toast.makeText(MainActivity.this, "Correcto", Toast.LENGTH_SHORT).show(), error -> Toast.makeText(MainActivity.this, "Incorrecto", Toast.LENGTH_SHORT).show()
         ) {
-            @Nullable
+            @NonNull
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
