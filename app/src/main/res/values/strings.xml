@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Ingecosmos</string>
+    <string name="menu_usuarios">Usuarios</string>
+    <string name="primer_nombre">Primer Nombre</string>
+    <string name="segundo_nombre">Segundo Nombre</string>
+    <string name="primer_apellido">Primer Apellido</string>
+    <string name="segundo_apellido">Segundo Apellido</string>
+    <string name="rol">Rol</string>
+    <string name="tipo_documento">Tipo Documento</string>
+    <string name="n_identi">N. Identificacion</string>
+    <string name="btnGuardar">Guardar</string>
+</resources>
